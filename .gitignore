@@ -9,7 +9,7 @@
 /resources/js/wayfinder
 /storage/*.key
 /storage/pail
-/vendor
+# /vendor  -- diaktifkan agar vendor ter-commit untuk Vercel (tidak ada composer di Vercel)
 .DS_Store
 .env
 .env.backup
