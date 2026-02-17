@@ -1,61 +1,46 @@
 <?php
 
-/**
- * Vercel Serverless Entry Point
- *
- * This file serves as the entry point for the Laravel application
- * when deployed on Vercel's serverless infrastructure.
- */
+use Illuminate\Http\Request;
 
-// Set the working directory to the project root
-chdir(__DIR__ . '/..');
+define('LARAVEL_START', microtime(true));
 
-// Register the Composer auto-loader
+// Check if the application is in maintenance mode...
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+// Register the Composer autoloader...
 require __DIR__ . '/../vendor/autoload.php';
 
-// Bootstrap Laravel and handle the incoming request
+// Bootstrap Laravel and handle the request...
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-// Fix for Vercel read-only filesystem
+// --- VERCEL CONFIGURATION ---
 if (isset($_SERVER['VERCEL_REGION']) || isset($_ENV['VERCEL_REGION'])) {
+    // 1. Storage Path Fix (Read-only filesystem)
     $path = '/tmp/storage';
     $app->useStoragePath($path);
-
-    // Create necessary directories
-    if (!is_dir($path . '/framework/views')) {
-        mkdir($path . '/framework/views', 0755, true);
-    }
-    if (!is_dir($path . '/framework/cache')) {
-        mkdir($path . '/framework/cache', 0755, true);
-    }
-    if (!is_dir($path . '/framework/sessions')) {
-        mkdir($path . '/framework/sessions', 0755, true);
-    }
-    if (!is_dir($path . '/logs')) {
-        mkdir($path . '/logs', 0755, true);
-    }
     
-    // Force logs to stderr so they appear in Vercel dashboard
-    // Force logs to stderr so they appear in Vercel dashboard
+    // Ensure directories exist
+    $dirs = [
+        $path . '/framework/views',
+        $path . '/framework/cache',
+        $path . '/framework/sessions',
+        $path . '/logs',
+    ];
+    
+    foreach ($dirs as $dir) {
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+    }
+
+    // 2. Logging Fix (Force stderr)
     $_ENV['LOG_CHANNEL'] = 'stderr';
     $_SERVER['LOG_CHANNEL'] = 'stderr';
 }
+// ----------------------------
 
-try {
-    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+// Handle the request
+$app->handleRequest(Request::capture());
 
-    $request = Illuminate\Http\Request::capture();
-
-    $response = $kernel->handle($request);
-
-    $response->send();
-
-    $kernel->terminate($request, $response);
-} catch (\Throwable $e) {
-    http_response_code(500);
-    echo "<h1>Error 500: Deployment Debug</h1>";
-    echo "<p><strong>Message:</strong> " . $e->getMessage() . "</p>";
-    echo "<p><strong>File:</strong> " . $e->getFile() . ":" . $e->getLine() . "</p>";
-    echo "<pre>" . $e->getTraceAsString() . "</pre>";
-    exit(1);
-}
