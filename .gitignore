@@ -4,9 +4,9 @@
 # /public/build  -- diaktifkan agar hasil build Vite ter-commit untuk Vercel
 /public/hot
 /public/storage
-/resources/js/actions
-/resources/js/routes
-/resources/js/wayfinder
+# /resources/js/actions -- diaktifkan agar file hasil generate ter-commit
+# /resources/js/routes -- diaktifkan agar file hasil generate ter-commit
+# /resources/js/wayfinder -- diaktifkan agar file hasil generate ter-commit
 /storage/*.key
 /storage/pail
 # /vendor  -- diaktifkan agar vendor ter-commit untuk Vercel (tidak ada composer di Vercel)
