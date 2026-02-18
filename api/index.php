@@ -4,24 +4,15 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// --- STATIC FILE HANDLER (Vercel PHP can't serve static files directly) ---
-$staticResult = require_once __DIR__ . '/static.php';
-if ($staticResult !== false) {
-    exit; // Static file was served
-}
-// ---
-
 // --- VERCEL CONFIGURATION (must be before autoload for early env setup) ---
-$isVercel = isset($_SERVER['VERCEL_REGION']) || isset($_ENV['VERCEL_REGION']) || getenv('VERCEL_REGION');
+$isVercel = isset($_SERVER['VERCEL']) || isset($_ENV['VERCEL']) || getenv('VERCEL') ||
+            isset($_SERVER['VERCEL_REGION']) || isset($_ENV['VERCEL_REGION']) || getenv('VERCEL_REGION');
 
 if ($isVercel) {
     // Set default environment variables if not set in Vercel Dashboard
-    // These can be overridden by setting Environment Variables in Vercel
     
     // Required Laravel settings
     if (!getenv('APP_KEY') && !isset($_ENV['APP_KEY'])) {
-        // IMPORTANT: This key should be set in Vercel Dashboard for security!
-        // This is a fallback to prevent crashes. Generate a new key for production.
         putenv('APP_KEY=base64:IYF9xw15lLmYv4xplXY94Vx9eTi/n+xfSwBXVPXQwa0=');
         $_ENV['APP_KEY'] = 'base64:IYF9xw15lLmYv4xplXY94Vx9eTi/n+xfSwBXVPXQwa0=';
     }
@@ -37,8 +28,10 @@ if ($isVercel) {
     }
     
     if (!getenv('APP_URL') && !isset($_ENV['APP_URL'])) {
-        putenv('APP_URL=https://rq-syababul-khair.vercel.app');
-        $_ENV['APP_URL'] = 'https://rq-syababul-khair.vercel.app';
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        putenv("APP_URL={$protocol}://{$host}");
+        $_ENV['APP_URL'] = "{$protocol}://{$host}";
     }
     
     // Database configuration (TiDB Cloud)
@@ -73,8 +66,8 @@ if ($isVercel) {
     }
     
     if (!getenv('MYSQL_ATTR_SSL_CA') && !isset($_ENV['MYSQL_ATTR_SSL_CA'])) {
-        putenv('MYSQL_ATTR_SSL_CA=certdb.pem');
-        $_ENV['MYSQL_ATTR_SSL_CA'] = 'certdb.pem';
+        putenv('MYSQL_ATTR_SSL_CA=' . __DIR__ . '/../certdb.pem');
+        $_ENV['MYSQL_ATTR_SSL_CA'] = __DIR__ . '/../certdb.pem';
     }
     
     // Vercel-compatible drivers (stateless)
@@ -110,8 +103,6 @@ if ($isVercel) {
     $app->useStoragePath($path);
     
     // 2. Cache Path Fix (Read-only bootstrap/cache)
-    // Laravel tries to write to these files. On Vercel, bootstrap/cache is read-only.
-    // We redirect them to /tmp which is writable.
     $cachePath = '/tmp/cache';
     if (!is_dir($cachePath)) {
         mkdir($cachePath, 0755, true);
