@@ -1,6 +1,6 @@
 {
+    "$schema": "https://openapi.vercel.sh/vercel.json",
     "version": 2,
-    "framework": null,
     "functions": {
         "api/index.php": {
             "runtime": "vercel-php@0.7.2",
@@ -10,27 +10,12 @@
         }
     },
     "routes": [
-        {
-            "src": "/build/(.*)",
-            "dest": "/public/build/$1"
-        },
-        {
-            "src": "/images/(.*)",
-            "dest": "/public/images/$1"
-        },
-        {
-            "src": "/favicon\\.(ico|svg)",
-            "dest": "/public/favicon.$1"
-        },
-        {
-            "src": "/robots\\.txt",
-            "dest": "/public/robots.txt"
-        },
+        { "handle": "filesystem" },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
     ],
-    "buildCommand": "npm install && npm run build",
-    "outputDirectory": "."
+    "installCommand": "npm install",
+    "buildCommand": "npm run build"
 }
