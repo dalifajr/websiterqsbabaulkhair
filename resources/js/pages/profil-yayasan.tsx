@@ -24,12 +24,35 @@ import {
 
 type ProfileContents = Record<string, Record<string, string>>;
 
+type GalleryPost = {
+    id: number;
+    title: string;
+    description: string | null;
+    image_path: string;
+    event_date: string;
+};
+
+type AchievementPost = {
+    id: number;
+    title: string;
+    description: string | null;
+    image_path: string;
+    event_date: string;
+};
+
 type Props = {
     canRegister: boolean;
     profileContents?: ProfileContents;
+    galleryPosts?: GalleryPost[];
+    achievementPosts?: AchievementPost[];
 };
 
-export default function ProfilYayasan({ canRegister, profileContents = {} }: Props) {
+export default function ProfilYayasan({
+    canRegister,
+    profileContents = {},
+    galleryPosts = [],
+    achievementPosts = [],
+}: Props) {
     // Helper to get content value with fallback
     const getContent = (section: string, key: string, fallback: string = ''): string => {
         return profileContents?.[section]?.[key] || fallback;
@@ -886,113 +909,139 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
 
                         {/* Content Grid */}
                         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-                            <div className="yp-prestasi-grid">
-                                {/* Photo Column */}
-                                <div className="yp-fadeInLeft">
-                                    <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.12)', border: '2px solid rgba(200,169,81,0.3)', position: 'relative' }}>
-                                        <img
-                                            src="/images/prestasi-khatam.jpg"
-                                            alt="Santri yang telah khatam hafalan 1 Juz Al-Qur'an"
-                                            className="yp-prestasi-img"
-                                        />
-                                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.75), transparent)', padding: '24px' }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                <Award size={20} color="#c8a951" />
-                                                <p style={{ color: '#c8a951', fontWeight: 600, fontSize: '14px', margin: 0, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Khatam 1 Juz</p>
-                                            </div>
-                                            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', margin: '4px 0 0' }}>Rumah Qur'an Syababul Khair</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Names Column */}
-                                <div className="yp-fadeInRight" style={{ animationDelay: '0.2s' }}>
-                                    <div style={{
-                                        backgroundColor: '#fff',
-                                        borderRadius: '24px',
-                                        padding: '32px',
-                                        boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
-                                        border: '1px solid rgba(0,0,0,0.06)',
-                                    }}>
-                                        {/* Achievement Title */}
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '28px' }}>
-                                            <div style={{
-                                                width: '56px',
-                                                height: '56px',
-                                                borderRadius: '16px',
-                                                background: 'linear-gradient(135deg, #c8a951, #e0c76e)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                boxShadow: '0 8px 24px rgba(200,169,81,0.25)',
-                                                flexShrink: 0,
-                                            }}>
-                                                <Trophy size={28} color="#0a5832" />
-                                            </div>
-                                            <div>
-                                                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0a5832', margin: 0, lineHeight: 1.3 }}>
-                                                    Khatam Hafalan 1 Juz
-                                                </h3>
-                                                <p style={{ color: '#888', fontSize: '14px', margin: '2px 0 0' }}>Al-Qur&apos;an &mdash; 5 Santri Berprestasi</p>
-                                            </div>
-                                        </div>
-
-                                        {/* Student List */}
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                            {[
-                                                'Ikhsan Salfath Rambe',
-                                                'Anisa Nur Ayu',
-                                                'Asyfa Cordelia Darussalam',
-                                                'Muhammad Azzam Fahlevi',
-                                                'Shyren Putri Rendrano',
-                                            ].map((name, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="yp-fadeInUp"
-                                                    style={{
-                                                        animationDelay: `${0.3 + i * 0.08}s`,
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        gap: '16px',
-                                                        padding: '14px 16px',
-                                                        borderRadius: '16px',
-                                                        backgroundColor: i === 0 ? 'rgba(13,110,63,0.06)' : 'rgba(0,0,0,0.02)',
-                                                        border: i === 0 ? '1px solid rgba(13,110,63,0.12)' : '1px solid transparent',
-                                                        transition: 'all 0.3s',
-                                                    }}
-                                                >
-                                                    <div style={{
-                                                        width: '36px',
-                                                        height: '36px',
-                                                        minWidth: '36px',
-                                                        borderRadius: '12px',
-                                                        background: i === 0
-                                                            ? 'linear-gradient(135deg, #c8a951, #e0c76e)'
-                                                            : 'linear-gradient(135deg, #0d6e3f, #15a060)',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        boxShadow: i === 0 ? '0 4px 12px rgba(200,169,81,0.3)' : '0 4px 12px rgba(13,110,63,0.2)',
-                                                    }}>
-                                                        <span style={{ color: '#fff', fontSize: '14px', fontWeight: 700 }}>{i + 1}</span>
+                            {achievementPosts.length > 0 ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    {achievementPosts.map((post, index) => (
+                                        <div key={post.id} className="yp-fadeInUp" style={{ animationDelay: `${0.1 * index}s` }}>
+                                            <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.12)', border: '2px solid rgba(200,169,81,0.3)', position: 'relative' }}>
+                                                <img
+                                                    src={`/storage/${post.image_path}`}
+                                                    alt={post.title}
+                                                    className="yp-prestasi-img"
+                                                    style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                                                />
+                                                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85), transparent)', padding: '24px' }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                        <Award size={20} color="#c8a951" />
+                                                        <p style={{ color: '#c8a951', fontWeight: 600, fontSize: '14px', margin: 0, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{post.title}</p>
                                                     </div>
-                                                    <div style={{ flex: 1 }}>
-                                                        <p style={{ margin: 0, fontWeight: 600, color: '#0a5832', fontSize: '15px' }}>{name}</p>
-                                                    </div>
-                                                    <Award size={16} color={i === 0 ? '#c8a951' : '#0d6e3f'} style={{ opacity: 0.6 }} />
+                                                    {post.description && (
+                                                        <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '14px', margin: '8px 0 0', lineHeight: 1.5 }}>{post.description}</p>
+                                                    )}
                                                 </div>
-                                            ))}
+                                            </div>
                                         </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="yp-prestasi-grid">
+                                    {/* Photo Column */}
+                                    <div className="yp-fadeInLeft">
+                                        <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.12)', border: '2px solid rgba(200,169,81,0.3)', position: 'relative' }}>
+                                            <img
+                                                src="/images/prestasi-khatam.jpg"
+                                                alt="Santri yang telah khatam hafalan 1 Juz Al-Qur'an"
+                                                className="yp-prestasi-img"
+                                            />
+                                            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.75), transparent)', padding: '24px' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                    <Award size={20} color="#c8a951" />
+                                                    <p style={{ color: '#c8a951', fontWeight: 600, fontSize: '14px', margin: 0, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Khatam 1 Juz</p>
+                                                </div>
+                                                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', margin: '4px 0 0' }}>Rumah Qur'an Syababul Khair</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                        {/* Bottom note */}
-                                        <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(0,0,0,0.06)', textAlign: 'center' }}>
-                                            <p style={{ color: '#888', fontSize: '13px', fontStyle: 'italic', margin: 0 }}>
-                                                Semoga menjadi inspirasi dan motivasi bagi santri lainnya 🌟
-                                            </p>
+                                    {/* Names Column */}
+                                    <div className="yp-fadeInRight" style={{ animationDelay: '0.2s' }}>
+                                        <div style={{
+                                            backgroundColor: '#fff',
+                                            borderRadius: '24px',
+                                            padding: '32px',
+                                            boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
+                                            border: '1px solid rgba(0,0,0,0.06)',
+                                        }}>
+                                            {/* Achievement Title */}
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '28px' }}>
+                                                <div style={{
+                                                    width: '56px',
+                                                    height: '56px',
+                                                    borderRadius: '16px',
+                                                    background: 'linear-gradient(135deg, #c8a951, #e0c76e)',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    boxShadow: '0 8px 24px rgba(200,169,81,0.25)',
+                                                    flexShrink: 0,
+                                                }}>
+                                                    <Trophy size={28} color="#0a5832" />
+                                                </div>
+                                                <div>
+                                                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0a5832', margin: 0, lineHeight: 1.3 }}>
+                                                        Khatam Hafalan 1 Juz
+                                                    </h3>
+                                                    <p style={{ color: '#888', fontSize: '14px', margin: '2px 0 0' }}>Al-Qur&apos;an &mdash; 5 Santri Berprestasi</p>
+                                                </div>
+                                            </div>
+
+                                            {/* Student List */}
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                                {[
+                                                    'Ikhsan Salfath Rambe',
+                                                    'Anisa Nur Ayu',
+                                                    'Asyfa Cordelia Darussalam',
+                                                    'Muhammad Azzam Fahlevi',
+                                                    'Shyren Putri Rendrano',
+                                                ].map((name, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="yp-fadeInUp"
+                                                        style={{
+                                                            animationDelay: `${0.3 + i * 0.08}s`,
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '16px',
+                                                            padding: '14px 16px',
+                                                            borderRadius: '16px',
+                                                            backgroundColor: i === 0 ? 'rgba(13,110,63,0.06)' : 'rgba(0,0,0,0.02)',
+                                                            border: i === 0 ? '1px solid rgba(13,110,63,0.12)' : '1px solid transparent',
+                                                            transition: 'all 0.3s',
+                                                        }}
+                                                    >
+                                                        <div style={{
+                                                            width: '36px',
+                                                            height: '36px',
+                                                            minWidth: '36px',
+                                                            borderRadius: '12px',
+                                                            background: i === 0
+                                                                ? 'linear-gradient(135deg, #c8a951, #e0c76e)'
+                                                                : 'linear-gradient(135deg, #0d6e3f, #15a060)',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            boxShadow: i === 0 ? '0 4px 12px rgba(200,169,81,0.3)' : '0 4px 12px rgba(13,110,63,0.2)',
+                                                        }}>
+                                                            <span style={{ color: '#fff', fontSize: '14px', fontWeight: 700 }}>{i + 1}</span>
+                                                        </div>
+                                                        <div style={{ flex: 1 }}>
+                                                            <p style={{ margin: 0, fontWeight: 600, color: '#0a5832', fontSize: '15px' }}>{name}</p>
+                                                        </div>
+                                                        <Award size={16} color={i === 0 ? '#c8a951' : '#0d6e3f'} style={{ opacity: 0.6 }} />
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            {/* Bottom note */}
+                                            <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(0,0,0,0.06)', textAlign: 'center' }}>
+                                                <p style={{ color: '#888', fontSize: '13px', fontStyle: 'italic', margin: 0 }}>
+                                                    Semoga menjadi inspirasi dan motivasi bagi santri lainnya 🌟
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </section>
@@ -1013,34 +1062,56 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="yp-fadeInLeft">
-                                <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', position: 'relative' }}>
-                                    <img
-                                        src={getContent('gallery', 'gallery_1', '/images/yayasan-foto-1.jpg')}
-                                        alt="Kegiatan bersama santri dan KKN"
-                                        className="yp-gallery-img"
-                                    />
-                                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)', padding: '24px' }}>
-                                        <p style={{ color: '#fff', fontWeight: 600, fontSize: '18px', margin: 0 }}>{getContent('gallery', 'gallery_1_title', 'KKN Angkatan 84 - Sungai Pinang')}</p>
-                                        <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', margin: '4px 0 0' }}>{getContent('gallery', 'gallery_1_desc', 'Kegiatan bersama santri dan mahasiswa KKN')}</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {galleryPosts.length > 0 ? (
+                                galleryPosts.map((post, index) => (
+                                    <div key={post.id} className="yp-fadeInUp" style={{ animationDelay: `${0.1 * index}s` }}>
+                                        <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', position: 'relative' }}>
+                                            <img
+                                                src={`/storage/${post.image_path}`}
+                                                alt={post.title}
+                                                className="yp-gallery-img"
+                                            />
+                                            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)', padding: '24px' }}>
+                                                <p style={{ color: '#fff', fontWeight: 600, fontSize: '18px', margin: 0 }}>{post.title}</p>
+                                                {post.description && (
+                                                    <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', margin: '4px 0 0' }}>{post.description}</p>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                ))
+                            ) : (
+                                <>
+                                    <div className="yp-fadeInLeft">
+                                        <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', position: 'relative' }}>
+                                            <img
+                                                src={getContent('gallery', 'gallery_1', '/images/yayasan-foto-1.jpg')}
+                                                alt="Kegiatan bersama santri dan KKN"
+                                                className="yp-gallery-img"
+                                            />
+                                            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)', padding: '24px' }}>
+                                                <p style={{ color: '#fff', fontWeight: 600, fontSize: '18px', margin: 0 }}>{getContent('gallery', 'gallery_1_title', 'KKN Angkatan 84 - Sungai Pinang')}</p>
+                                                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', margin: '4px 0 0' }}>{getContent('gallery', 'gallery_1_desc', 'Kegiatan bersama santri dan mahasiswa KKN')}</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div className="yp-fadeInRight" style={{ animationDelay: '0.2s' }}>
-                                <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', position: 'relative' }}>
-                                    <img
-                                        src={getContent('gallery', 'gallery_2', '/images/yayasan-foto-2.jpg')}
-                                        alt="Kegiatan malam yang penuh kebersamaan"
-                                        className="yp-gallery-img"
-                                    />
-                                    <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)', padding: '24px' }}>
-                                        <p style={{ color: '#fff', fontWeight: 600, fontSize: '18px', margin: 0 }}>{getContent('gallery', 'gallery_2_title', 'Kebersamaan Santri')}</p>
-                                        <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', margin: '4px 0 0' }}>{getContent('gallery', 'gallery_2_desc', 'Momen kebersamaan yang penuh cinta dan kasih sayang')}</p>
+                                    <div className="yp-fadeInRight" style={{ animationDelay: '0.2s' }}>
+                                        <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', position: 'relative' }}>
+                                            <img
+                                                src={getContent('gallery', 'gallery_2', '/images/yayasan-foto-2.jpg')}
+                                                alt="Kegiatan malam yang penuh kebersamaan"
+                                                className="yp-gallery-img"
+                                            />
+                                            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)', padding: '24px' }}>
+                                                <p style={{ color: '#fff', fontWeight: 600, fontSize: '18px', margin: 0 }}>{getContent('gallery', 'gallery_2_title', 'Kebersamaan Santri')}</p>
+                                                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', margin: '4px 0 0' }}>{getContent('gallery', 'gallery_2_desc', 'Momen kebersamaan yang penuh cinta dan kasih sayang')}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </section>

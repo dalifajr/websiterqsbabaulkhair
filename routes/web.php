@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HelpController;
 use App\Http\Controllers\ReportController;
 use App\Models\ProfileContent;
+use App\Models\GalleryPost;
+use App\Models\AchievementPost;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -20,9 +22,21 @@ Route::get('/', function () {
             return $items->pluck('value', 'key');
         });
 
+    $galleryPosts = GalleryPost::where('is_published', true)
+        ->orderByDesc('event_date')
+        ->take(6)
+        ->get();
+
+    $achievementPosts = AchievementPost::where('is_published', true)
+        ->orderByDesc('event_date')
+        ->take(6)
+        ->get();
+
     return Inertia::render('profil-yayasan', [
         'canRegister' => Features::enabled(Features::registration()),
         'profileContents' => $profileContents,
+        'galleryPosts' => $galleryPosts,
+        'achievementPosts' => $achievementPosts,
     ]);
 })->name('home');
 
