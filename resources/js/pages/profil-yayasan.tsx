@@ -17,6 +17,7 @@ import {
     Sun,
     Menu,
     X,
+    Quote,
 } from 'lucide-react';
 
 type ProfileContents = Record<string, Record<string, string>>;
@@ -235,6 +236,62 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                             justify-content: center;
                             gap: 16px;
                         }
+                    }
+
+                    /* ===== Sambutan Pimpinan ===== */
+                    .yp-sambutan-grid {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 40px;
+                    }
+                    @media (min-width: 1024px) {
+                        .yp-sambutan-grid {
+                            flex-direction: row;
+                            align-items: flex-start;
+                            gap: 56px;
+                        }
+                    }
+                    .yp-sambutan-photo-wrapper {
+                        flex-shrink: 0;
+                        position: relative;
+                        width: 220px;
+                        height: 220px;
+                    }
+                    @media (min-width: 640px) {
+                        .yp-sambutan-photo-wrapper {
+                            width: 280px;
+                            height: 280px;
+                        }
+                    }
+                    @media (min-width: 1024px) {
+                        .yp-sambutan-photo-wrapper {
+                            width: 320px;
+                            height: 320px;
+                        }
+                    }
+                    .yp-sambutan-photo-ring {
+                        position: absolute;
+                        inset: -8px;
+                        border-radius: 50%;
+                        border: 3px solid rgba(200,169,81,0.4);
+                        animation: yp-pulseGlow 3s ease-in-out infinite;
+                    }
+                    .yp-sambutan-photo {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        object-position: top center;
+                        border: 4px solid rgba(200,169,81,0.5);
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                    }
+                    @keyframes yp-floatQuote {
+                        0%, 100% { transform: translateY(0) rotate(-8deg); }
+                        50% { transform: translateY(-6px) rotate(-8deg); }
+                    }
+                    .yp-quote-icon {
+                        animation: yp-floatQuote 4s ease-in-out infinite;
                     }
                 `}</style>
             </Head>
@@ -538,6 +595,105 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                                         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)', padding: '24px' }}>
                                             <p style={{ color: '#fff', fontWeight: 500, fontSize: '18px', margin: 0 }}>Kegiatan Santri</p>
                                             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px', margin: '4px 0 0' }}>Yayasan RQ Syababul Khair</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Sambutan Pimpinan Section */}
+                <section className="yp-section" style={{ backgroundColor: '#0a5832', position: 'relative', overflow: 'hidden' }}>
+                    <div className="yp-pattern" style={{ position: 'absolute', inset: 0, opacity: 0.15 }} />
+                    {/* Decorative gradient orbs */}
+                    <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,169,81,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                    <div style={{ position: 'absolute', bottom: '-80px', left: '-80px', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(13,110,63,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+                    <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px', position: 'relative', zIndex: 10 }}>
+                        {/* Section Header */}
+                        <div className="yp-fadeInUp" style={{ textAlign: 'center', marginBottom: '56px' }}>
+                            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: 'rgba(255,255,255,0.1)', padding: '8px 16px', borderRadius: '50px', marginBottom: '24px' }}>
+                                <Quote size={16} color="#c8a951" />
+                                <span style={{ fontSize: '14px', fontWeight: 500, color: '#c8a951' }}>Sambutan Pimpinan</span>
+                            </div>
+                            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', fontWeight: 700, color: '#fff', marginBottom: '16px' }}>
+                                Kata Sambutan
+                            </h2>
+                            <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '640px', margin: '0 auto', fontSize: '18px' }}>
+                                Pesan dari Pimpinan Yayasan RQ Syababul Khair
+                            </p>
+                        </div>
+
+                        {/* Content */}
+                        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                            <div className="yp-sambutan-grid">
+                                {/* Photo Column */}
+                                <div className="yp-fadeInLeft" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <div className="yp-sambutan-photo-wrapper">
+                                        <div className="yp-sambutan-photo-ring" />
+                                        <img
+                                            src={getContent('sambutan', 'sambutan_photo', '/images/ustadz-iqbal.png')}
+                                            alt="Ustadz Aa Muhammad Iqbal, S.Pd."
+                                            className="yp-sambutan-photo"
+                                        />
+                                    </div>
+                                    <div style={{ textAlign: 'center', marginTop: '24px' }}>
+                                        <p style={{ color: '#fff', fontWeight: 700, fontSize: '18px', margin: 0, lineHeight: 1.3 }}>
+                                            {getContent('sambutan', 'sambutan_nama', 'Ustadz Aa Muhammad Iqbal, S.Pd.')}
+                                        </p>
+                                        <p style={{ color: '#c8a951', fontSize: '14px', fontWeight: 500, marginTop: '4px' }}>
+                                            {getContent('sambutan', 'sambutan_jabatan', 'Pimpinan Yayasan RQ Syababul Khair')}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Quote Column */}
+                                <div className="yp-fadeInRight" style={{ flex: 1 }}>
+                                    <div style={{
+                                        backgroundColor: 'rgba(255,255,255,0.06)',
+                                        backdropFilter: 'blur(20px)',
+                                        borderRadius: '24px',
+                                        padding: '36px',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        position: 'relative',
+                                    }}>
+                                        {/* Decorative quote icon */}
+                                        <div className="yp-quote-icon" style={{ position: 'absolute', top: '-16px', left: '24px' }}>
+                                            <div style={{
+                                                width: '48px',
+                                                height: '48px',
+                                                borderRadius: '50%',
+                                                background: 'linear-gradient(135deg, #c8a951, #e0c76e)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                boxShadow: '0 8px 24px rgba(200,169,81,0.3)',
+                                            }}>
+                                                <Quote size={24} color="#0a5832" />
+                                            </div>
+                                        </div>
+
+                                        <div style={{ marginTop: '16px' }}>
+                                            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '16px', lineHeight: 1.9, marginBottom: '16px' }}>
+                                                {getContent('sambutan', 'sambutan_text_1', "Assalamu'alaikum Warahmatullahi Wabarakatuh.")}
+                                            </p>
+                                            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '15px', lineHeight: 1.9, marginBottom: '16px' }}>
+                                                {getContent('sambutan', 'sambutan_text_2', "Segala puji bagi Allah SWT yang telah memberikan rahmat dan karunia-Nya. Alhamdulillah, Yayasan Rumah Qur'an Syababul Khair hadir di tengah-tengah masyarakat dengan semangat untuk mendidik generasi muda dalam mencintai, memahami, dan mengamalkan Al-Qur'an dalam kehidupan sehari-hari.")}
+                                            </p>
+                                            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '15px', lineHeight: 1.9, marginBottom: '16px' }}>
+                                                {getContent('sambutan', 'sambutan_text_3', "Kami berkomitmen untuk membentuk generasi Qur'ani yang tidak hanya mampu membaca dan menghafal Al-Qur'an, tetapi juga memiliki akhlak mulia dan kecintaan yang mendalam terhadap ilmu agama. Dengan dukungan para pengajar yang berdedikasi dan lingkungan belajar yang kondusif, kami optimis dapat mewujudkan visi tersebut.")}
+                                            </p>
+                                            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '15px', lineHeight: 1.9, marginBottom: '0' }}>
+                                                {getContent('sambutan', 'sambutan_text_4', "Kami mengajak seluruh masyarakat untuk bersama-sama mendukung dan berpartisipasi dalam kegiatan yang kami selenggarakan. Semoga Allah SWT senantiasa memberikan keberkahan dan kemudahan dalam setiap langkah perjuangan kita. Wassalamu'alaikum Warahmatullahi Wabarakatuh.")}
+                                            </p>
+                                        </div>
+
+                                        {/* Signature line */}
+                                        <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                                            <p style={{ color: '#c8a951', fontStyle: 'italic', fontSize: '14px', margin: 0, fontFamily: "'Playfair Display', serif" }}>
+                                                {getContent('sambutan', 'sambutan_ttd', 'Billahi Taufiq Wal Hidayah')}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
