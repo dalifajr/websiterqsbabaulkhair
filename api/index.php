@@ -10,13 +10,9 @@ $isVercel = isset($_SERVER['VERCEL']) || isset($_ENV['VERCEL']) || getenv('VERCE
 
 if ($isVercel) {
     // Set default environment variables if not set in Vercel Dashboard
+    // NOTE: Set sensitive values (APP_KEY, DB_USERNAME, DB_PASSWORD) in Vercel Dashboard > Settings > Environment Variables
     
     // Required Laravel settings
-    if (!getenv('APP_KEY') && !isset($_ENV['APP_KEY'])) {
-        putenv('APP_KEY=base64:IYF9xw15lLmYv4xplXY94Vx9eTi/n+xfSwBXVPXQwa0=');
-        $_ENV['APP_KEY'] = 'base64:IYF9xw15lLmYv4xplXY94Vx9eTi/n+xfSwBXVPXQwa0=';
-    }
-    
     if (!getenv('APP_ENV') && !isset($_ENV['APP_ENV'])) {
         putenv('APP_ENV=production');
         $_ENV['APP_ENV'] = 'production';
@@ -34,35 +30,15 @@ if ($isVercel) {
         $_ENV['APP_URL'] = "{$protocol}://{$host}";
     }
     
-    // Database configuration (TiDB Cloud)
+    // Database configuration (set credentials in Vercel Environment Variables)
     if (!getenv('DB_CONNECTION') && !isset($_ENV['DB_CONNECTION'])) {
         putenv('DB_CONNECTION=mysql');
         $_ENV['DB_CONNECTION'] = 'mysql';
     }
     
-    if (!getenv('DB_HOST') && !isset($_ENV['DB_HOST'])) {
-        putenv('DB_HOST=gateway01.ap-southeast-1.prod.aws.tidbcloud.com');
-        $_ENV['DB_HOST'] = 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com';
-    }
-    
     if (!getenv('DB_PORT') && !isset($_ENV['DB_PORT'])) {
         putenv('DB_PORT=4000');
         $_ENV['DB_PORT'] = '4000';
-    }
-    
-    if (!getenv('DB_DATABASE') && !isset($_ENV['DB_DATABASE'])) {
-        putenv('DB_DATABASE=test');
-        $_ENV['DB_DATABASE'] = 'test';
-    }
-    
-    if (!getenv('DB_USERNAME') && !isset($_ENV['DB_USERNAME'])) {
-        putenv('DB_USERNAME=ZXxEW3axBqJMsHX.root');
-        $_ENV['DB_USERNAME'] = 'ZXxEW3axBqJMsHX.root';
-    }
-    
-    if (!getenv('DB_PASSWORD') && !isset($_ENV['DB_PASSWORD'])) {
-        putenv('DB_PASSWORD=MQ8s4kgI9Aj638zu');
-        $_ENV['DB_PASSWORD'] = 'MQ8s4kgI9Aj638zu';
     }
     
     if (!getenv('MYSQL_ATTR_SSL_CA') && !isset($_ENV['MYSQL_ATTR_SSL_CA'])) {
