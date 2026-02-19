@@ -12,6 +12,10 @@ if ($isVercel) {
     // Set default environment variables if not set in Vercel Dashboard
     // NOTE: Set sensitive values (APP_KEY, DB_USERNAME, DB_PASSWORD) in Vercel Dashboard > Settings > Environment Variables
     
+    // Force HTTPS on Vercel (Vercel always uses HTTPS)
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+    
     // Required Laravel settings
     if (!getenv('APP_ENV') && !isset($_ENV['APP_ENV'])) {
         putenv('APP_ENV=production');
@@ -23,12 +27,10 @@ if ($isVercel) {
         $_ENV['APP_DEBUG'] = 'false';
     }
     
-    if (!getenv('APP_URL') && !isset($_ENV['APP_URL'])) {
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        putenv("APP_URL={$protocol}://{$host}");
-        $_ENV['APP_URL'] = "{$protocol}://{$host}";
-    }
+    // Force HTTPS URL
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    putenv("APP_URL=https://{$host}");
+    $_ENV['APP_URL'] = "https://{$host}";
     
     // Database configuration (set credentials in Vercel Environment Variables)
     if (!getenv('DB_CONNECTION') && !isset($_ENV['DB_CONNECTION'])) {
