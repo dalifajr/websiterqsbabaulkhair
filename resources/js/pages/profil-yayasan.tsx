@@ -225,10 +225,8 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            {/* Dark Mode Toggle - Hidden on mobile */}
                             <button
                                 onClick={toggleDarkMode}
-                                className="hidden sm:block"
                                 style={{
                                     padding: '8px',
                                     borderRadius: '50%',
@@ -241,11 +239,10 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
                             </button>
 
-                            {/* E-Rapor Link - Hidden on mobile, shown in mobile menu */}
                             <Link
                                 href="/login"
-                                className="hidden sm:inline-flex"
                                 style={{
+                                    display: 'inline-flex',
                                     alignItems: 'center',
                                     gap: '8px',
                                     padding: '8px 20px',
@@ -268,26 +265,22 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                                 className="lg:hidden"
                                 style={{
-                                    padding: '10px',
-                                    borderRadius: '12px',
+                                    padding: '8px',
+                                    borderRadius: '50%',
                                     border: 'none',
                                     cursor: 'pointer',
-                                    background: isScrolled ? 'rgba(13,110,63,0.1)' : 'rgba(255,255,255,0.15)',
-                                    color: isScrolled ? '#0d6e3f' : '#fff',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
+                                    background: 'none',
+                                    color: isScrolled ? '#555' : '#fff',
                                 }}
                             >
-                                {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                             </button>
                         </div>
                     </div>
 
                     {/* Mobile Menu */}
                     {isMobileMenuOpen && (
-                        <div className="lg:hidden yp-glass" style={{ backgroundColor: 'rgba(255,255,255,0.98)', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '12px 16px', maxHeight: '70vh', overflowY: 'auto' }}>
-                            {/* Navigation Items */}
+                        <div className="lg:hidden yp-glass" style={{ backgroundColor: 'rgba(255,255,255,0.95)', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px' }}>
                             {navItems.map((item) => (
                                 <button
                                     key={item.id}
@@ -296,67 +289,20 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                                         display: 'block',
                                         width: '100%',
                                         textAlign: 'left',
-                                        padding: '14px 16px',
+                                        padding: '12px 16px',
                                         borderRadius: '12px',
-                                        fontSize: '15px',
+                                        fontSize: '14px',
                                         fontWeight: 500,
                                         border: 'none',
                                         cursor: 'pointer',
                                         marginBottom: '4px',
                                         backgroundColor: activeSection === item.id ? '#0d6e3f' : 'transparent',
-                                        color: activeSection === item.id ? '#fff' : '#333',
-                                        transition: 'all 0.2s',
+                                        color: activeSection === item.id ? '#fff' : '#555',
                                     }}
                                 >
                                     {item.label}
                                 </button>
                             ))}
-                            
-                            {/* Mobile Menu Footer */}
-                            <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: '12px', paddingTop: '12px', display: 'flex', gap: '8px' }}>
-                                <button
-                                    onClick={() => { toggleDarkMode(); setIsMobileMenuOpen(false); }}
-                                    style={{
-                                        flex: 1,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        gap: '8px',
-                                        padding: '12px',
-                                        borderRadius: '12px',
-                                        border: '1px solid rgba(0,0,0,0.1)',
-                                        cursor: 'pointer',
-                                        background: 'transparent',
-                                        color: '#555',
-                                        fontSize: '14px',
-                                        fontWeight: 500,
-                                    }}
-                                >
-                                    {isDark ? <Sun size={18} /> : <Moon size={18} />}
-                                    {isDark ? 'Mode Terang' : 'Mode Gelap'}
-                                </button>
-                                <Link
-                                    href="/login"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    style={{
-                                        flex: 1,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        gap: '8px',
-                                        padding: '12px',
-                                        borderRadius: '12px',
-                                        backgroundColor: '#0d6e3f',
-                                        color: '#fff',
-                                        textDecoration: 'none',
-                                        fontSize: '14px',
-                                        fontWeight: 600,
-                                    }}
-                                >
-                                    <GraduationCap size={18} />
-                                    E-Rapor
-                                </Link>
-                            </div>
                         </div>
                     )}
                 </nav>
@@ -695,7 +641,7 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                             </p>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '32px' }}>
+                        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[3fr_2fr]">
                             <div className="yp-fadeInLeft">
                                 <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', border: '2px solid rgba(0,0,0,0.08)' }}>
                                     <iframe
@@ -848,7 +794,7 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
 
                 {/* Footer */}
                 <footer style={{ backgroundColor: '#0a5832', borderTop: '1px solid rgba(255,255,255,0.1)', padding: '32px 0' }}>
-                    <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+                    <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '16px' }} className="flex-col sm:flex-row sm:justify-between">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <img
                                 src="/images/yayasan-logo.png"
