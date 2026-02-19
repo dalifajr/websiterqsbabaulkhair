@@ -225,8 +225,10 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {/* Dark Mode Toggle - Hidden on mobile */}
                             <button
                                 onClick={toggleDarkMode}
+                                className="hidden sm:block"
                                 style={{
                                     padding: '8px',
                                     borderRadius: '50%',
@@ -239,10 +241,11 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
                             </button>
 
+                            {/* E-Rapor Link - Hidden on mobile, shown in mobile menu */}
                             <Link
                                 href="/login"
+                                className="hidden sm:inline-flex"
                                 style={{
-                                    display: 'inline-flex',
                                     alignItems: 'center',
                                     gap: '8px',
                                     padding: '8px 20px',
@@ -265,22 +268,26 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                                 className="lg:hidden"
                                 style={{
-                                    padding: '8px',
-                                    borderRadius: '50%',
+                                    padding: '10px',
+                                    borderRadius: '12px',
                                     border: 'none',
                                     cursor: 'pointer',
-                                    background: 'none',
-                                    color: isScrolled ? '#555' : '#fff',
+                                    background: isScrolled ? 'rgba(13,110,63,0.1)' : 'rgba(255,255,255,0.15)',
+                                    color: isScrolled ? '#0d6e3f' : '#fff',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
                                 }}
                             >
-                                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                                {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
                             </button>
                         </div>
                     </div>
 
                     {/* Mobile Menu */}
                     {isMobileMenuOpen && (
-                        <div className="lg:hidden yp-glass" style={{ backgroundColor: 'rgba(255,255,255,0.95)', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px' }}>
+                        <div className="lg:hidden yp-glass" style={{ backgroundColor: 'rgba(255,255,255,0.98)', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '12px 16px', maxHeight: '70vh', overflowY: 'auto' }}>
+                            {/* Navigation Items */}
                             {navItems.map((item) => (
                                 <button
                                     key={item.id}
@@ -289,20 +296,67 @@ export default function ProfilYayasan({ canRegister, profileContents = {} }: Pro
                                         display: 'block',
                                         width: '100%',
                                         textAlign: 'left',
-                                        padding: '12px 16px',
+                                        padding: '14px 16px',
                                         borderRadius: '12px',
-                                        fontSize: '14px',
+                                        fontSize: '15px',
                                         fontWeight: 500,
                                         border: 'none',
                                         cursor: 'pointer',
                                         marginBottom: '4px',
                                         backgroundColor: activeSection === item.id ? '#0d6e3f' : 'transparent',
-                                        color: activeSection === item.id ? '#fff' : '#555',
+                                        color: activeSection === item.id ? '#fff' : '#333',
+                                        transition: 'all 0.2s',
                                     }}
                                 >
                                     {item.label}
                                 </button>
                             ))}
+                            
+                            {/* Mobile Menu Footer */}
+                            <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', marginTop: '12px', paddingTop: '12px', display: 'flex', gap: '8px' }}>
+                                <button
+                                    onClick={() => { toggleDarkMode(); setIsMobileMenuOpen(false); }}
+                                    style={{
+                                        flex: 1,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '8px',
+                                        padding: '12px',
+                                        borderRadius: '12px',
+                                        border: '1px solid rgba(0,0,0,0.1)',
+                                        cursor: 'pointer',
+                                        background: 'transparent',
+                                        color: '#555',
+                                        fontSize: '14px',
+                                        fontWeight: 500,
+                                    }}
+                                >
+                                    {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                                    {isDark ? 'Mode Terang' : 'Mode Gelap'}
+                                </button>
+                                <Link
+                                    href="/login"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    style={{
+                                        flex: 1,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: '8px',
+                                        padding: '12px',
+                                        borderRadius: '12px',
+                                        backgroundColor: '#0d6e3f',
+                                        color: '#fff',
+                                        textDecoration: 'none',
+                                        fontSize: '14px',
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    <GraduationCap size={18} />
+                                    E-Rapor
+                                </Link>
+                            </div>
                         </div>
                     )}
                 </nav>
