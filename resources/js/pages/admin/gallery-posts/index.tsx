@@ -96,9 +96,9 @@ export default function GalleryPostIndex({ posts, filters }: Props) {
                                 className="group rounded-2xl border bg-card overflow-hidden hover:shadow-lg transition-all"
                             >
                                 {/* Image */}
-                                <div className="relative aspect-[4/3] overflow-hidden">
+                                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                                     <img
-                                        src={`/storage/${post.image_path}`}
+                                        src={post.image_path.startsWith('data:') ? post.image_path : `/storage/${post.image_path}`}
                                         alt={post.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                     />

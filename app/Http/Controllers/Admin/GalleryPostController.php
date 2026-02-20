@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\GalleryPost;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -47,12 +46,12 @@ class GalleryPostController extends Controller
             'is_published' => ['boolean'],
         ]);
 
-        $imagePath = $this->compressAndStoreImage($request->file('image'), 'gallery');
+        $imageData = $this->compressAndConvertToBase64($request->file('image'));
 
         GalleryPost::create([
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
-            'image_path' => $imagePath,
+            'image_path' => $imageData,
             'event_date' => $validated['event_date'],
             'is_published' => $validated['is_published'] ?? true,
             'created_by_user_id' => auth()->id(),
@@ -87,11 +86,7 @@ class GalleryPostController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            // Delete old image
-            if ($galleryPost->image_path && Storage::disk('public')->exists($galleryPost->image_path)) {
-                Storage::disk('public')->delete($galleryPost->image_path);
-            }
-            $data['image_path'] = $this->compressAndStoreImage($request->file('image'), 'gallery');
+            $data['image_path'] = $this->compressAndConvertToBase64($request->file('image'));
         }
 
         $galleryPost->update($data);
@@ -102,10 +97,6 @@ class GalleryPostController extends Controller
 
     public function destroy(GalleryPost $galleryPost): RedirectResponse
     {
-        if ($galleryPost->image_path && Storage::disk('public')->exists($galleryPost->image_path)) {
-            Storage::disk('public')->delete($galleryPost->image_path);
-        }
-
         $galleryPost->delete();
 
         return redirect()->route('admin.gallery-posts.index')
@@ -113,21 +104,20 @@ class GalleryPostController extends Controller
     }
 
     /**
-     * Compress and store image using GD library
+     * Compress image and convert to base64 data URL
      */
-    private function compressAndStoreImage($file, string $folder): string
+    private function compressAndConvertToBase64($file): string
     {
-        // If GD is not available, store without compression
+        // If GD is not available, convert directly to base64
         if (!\extension_loaded('gd')) {
-            return $file->store("uploads/{$folder}", 'public');
+            $contents = \file_get_contents($file->getPathname());
+            $mime = $file->getMimeType();
+            return 'data:' . $mime . ';base64,' . \base64_encode($contents);
         }
-
-        $filename = \uniqid($folder . '_') . '.jpg';
-        $path = "uploads/{$folder}/{$filename}";
 
         // Get image info
         $imageInfo = \getimagesize($file->getPathname());
-        $mime = $imageInfo['mime'] ?? '';
+        $mime = $imageInfo['mime'] ?? 'image/jpeg';
 
         // Create image resource based on type
         $sourceImage = match ($mime) {
@@ -138,17 +128,18 @@ class GalleryPostController extends Controller
         };
 
         if (!$sourceImage) {
-            // Fallback: store without compression
-            return $file->store("uploads/{$folder}", 'public');
+            // Fallback: convert directly to base64
+            $contents = \file_get_contents($file->getPathname());
+            return 'data:' . $mime . ';base64,' . \base64_encode($contents);
         }
 
         // Get original dimensions
         $origWidth = \imagesx($sourceImage);
         $origHeight = \imagesy($sourceImage);
 
-        // Maximum dimensions (1200px wide)
-        $maxWidth = 1200;
-        $maxHeight = 900;
+        // Maximum dimensions (800px for smaller base64)
+        $maxWidth = 800;
+        $maxHeight = 600;
 
         // Calculate new dimensions maintaining aspect ratio
         $ratio = min($maxWidth / $origWidth, $maxHeight / $origHeight, 1);
@@ -158,29 +149,22 @@ class GalleryPostController extends Controller
         // Create new image
         $newImage = \imagecreatetruecolor($newWidth, $newHeight);
 
-        // Handle transparency for PNG
-        if ($mime === 'image/png') {
-            $white = \imagecolorallocate($newImage, 255, 255, 255);
-            \imagefill($newImage, 0, 0, $white);
-        }
+        // Handle transparency for PNG (fill with white)
+        $white = \imagecolorallocate($newImage, 255, 255, 255);
+        \imagefill($newImage, 0, 0, $white);
 
         // Resize
         \imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
 
-        // Ensure directory exists
-        $fullDir = \storage_path("app/public/uploads/{$folder}");
-        if (!\is_dir($fullDir)) {
-            \mkdir($fullDir, 0755, true);
-        }
-
-        // Save as JPEG with 75% quality (good balance of quality vs size)
-        $fullPath = \storage_path("app/public/{$path}");
-        \imagejpeg($newImage, $fullPath, 75);
+        // Output to buffer
+        \ob_start();
+        \imagejpeg($newImage, null, 70); // 70% quality for smaller size
+        $imageData = \ob_get_clean();
 
         // Free memory
         \imagedestroy($sourceImage);
         \imagedestroy($newImage);
 
-        return $path;
+        return 'data:image/jpeg;base64,' . \base64_encode($imageData);
     }
 }

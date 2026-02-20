@@ -1068,7 +1068,7 @@ export default function ProfilYayasan({
                                     <div key={post.id} className="yp-fadeInUp" style={{ animationDelay: `${0.1 * index}s` }}>
                                         <div className="yp-photo" style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', position: 'relative' }}>
                                             <img
-                                                src={`/storage/${post.image_path}`}
+                                                src={post.image_path.startsWith('data:') ? post.image_path : `/storage/${post.image_path}`}
                                                 alt={post.title}
                                                 className="yp-gallery-img"
                                             />

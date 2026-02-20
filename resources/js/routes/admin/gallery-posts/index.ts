@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::index
- * @see app/Http/Controllers/Admin/GalleryPostController.php:15
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:14
  * @route '/admin/gallery-posts'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::index
- * @see app/Http/Controllers/Admin/GalleryPostController.php:15
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:14
  * @route '/admin/gallery-posts'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::index
- * @see app/Http/Controllers/Admin/GalleryPostController.php:15
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:14
  * @route '/admin/gallery-posts'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::index
- * @see app/Http/Controllers/Admin/GalleryPostController.php:15
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:14
  * @route '/admin/gallery-posts'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::index
- * @see app/Http/Controllers/Admin/GalleryPostController.php:15
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:14
  * @route '/admin/gallery-posts'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::index
- * @see app/Http/Controllers/Admin/GalleryPostController.php:15
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:14
  * @route '/admin/gallery-posts'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::index
- * @see app/Http/Controllers/Admin/GalleryPostController.php:15
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:14
  * @route '/admin/gallery-posts'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::create
- * @see app/Http/Controllers/Admin/GalleryPostController.php:35
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:34
  * @route '/admin/gallery-posts/create'
  */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::create
- * @see app/Http/Controllers/Admin/GalleryPostController.php:35
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:34
  * @route '/admin/gallery-posts/create'
  */
 create.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::create
- * @see app/Http/Controllers/Admin/GalleryPostController.php:35
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:34
  * @route '/admin/gallery-posts/create'
  */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::create
- * @see app/Http/Controllers/Admin/GalleryPostController.php:35
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:34
  * @route '/admin/gallery-posts/create'
  */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::create
- * @see app/Http/Controllers/Admin/GalleryPostController.php:35
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:34
  * @route '/admin/gallery-posts/create'
  */
     const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::create
- * @see app/Http/Controllers/Admin/GalleryPostController.php:35
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:34
  * @route '/admin/gallery-posts/create'
  */
         createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::create
- * @see app/Http/Controllers/Admin/GalleryPostController.php:35
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:34
  * @route '/admin/gallery-posts/create'
  */
         createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -157,7 +157,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     create.form = createForm
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::store
- * @see app/Http/Controllers/Admin/GalleryPostController.php:40
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:39
  * @route '/admin/gallery-posts'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -172,7 +172,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::store
- * @see app/Http/Controllers/Admin/GalleryPostController.php:40
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:39
  * @route '/admin/gallery-posts'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -181,7 +181,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::store
- * @see app/Http/Controllers/Admin/GalleryPostController.php:40
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:39
  * @route '/admin/gallery-posts'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -191,7 +191,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::store
- * @see app/Http/Controllers/Admin/GalleryPostController.php:40
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:39
  * @route '/admin/gallery-posts'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -201,7 +201,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::store
- * @see app/Http/Controllers/Admin/GalleryPostController.php:40
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:39
  * @route '/admin/gallery-posts'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -212,7 +212,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::edit
- * @see app/Http/Controllers/Admin/GalleryPostController.php:65
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:64
  * @route '/admin/gallery-posts/{galleryPost}/edit'
  */
 export const edit = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -227,7 +227,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::edit
- * @see app/Http/Controllers/Admin/GalleryPostController.php:65
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:64
  * @route '/admin/gallery-posts/{galleryPost}/edit'
  */
 edit.url = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -260,7 +260,7 @@ edit.url = (args: { galleryPost: number | { id: number } } | [galleryPost: numbe
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::edit
- * @see app/Http/Controllers/Admin/GalleryPostController.php:65
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:64
  * @route '/admin/gallery-posts/{galleryPost}/edit'
  */
 edit.get = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -269,7 +269,7 @@ edit.get = (args: { galleryPost: number | { id: number } } | [galleryPost: numbe
 })
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::edit
- * @see app/Http/Controllers/Admin/GalleryPostController.php:65
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:64
  * @route '/admin/gallery-posts/{galleryPost}/edit'
  */
 edit.head = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -279,7 +279,7 @@ edit.head = (args: { galleryPost: number | { id: number } } | [galleryPost: numb
 
     /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::edit
- * @see app/Http/Controllers/Admin/GalleryPostController.php:65
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:64
  * @route '/admin/gallery-posts/{galleryPost}/edit'
  */
     const editForm = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -289,7 +289,7 @@ edit.head = (args: { galleryPost: number | { id: number } } | [galleryPost: numb
 
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::edit
- * @see app/Http/Controllers/Admin/GalleryPostController.php:65
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:64
  * @route '/admin/gallery-posts/{galleryPost}/edit'
  */
         editForm.get = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -298,7 +298,7 @@ edit.head = (args: { galleryPost: number | { id: number } } | [galleryPost: numb
         })
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::edit
- * @see app/Http/Controllers/Admin/GalleryPostController.php:65
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:64
  * @route '/admin/gallery-posts/{galleryPost}/edit'
  */
         editForm.head = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -314,7 +314,7 @@ edit.head = (args: { galleryPost: number | { id: number } } | [galleryPost: numb
     edit.form = editForm
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::update
- * @see app/Http/Controllers/Admin/GalleryPostController.php:72
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:71
  * @route '/admin/gallery-posts/{galleryPost}'
  */
 export const update = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -329,7 +329,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::update
- * @see app/Http/Controllers/Admin/GalleryPostController.php:72
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:71
  * @route '/admin/gallery-posts/{galleryPost}'
  */
 update.url = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -362,7 +362,7 @@ update.url = (args: { galleryPost: number | { id: number } } | [galleryPost: num
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::update
- * @see app/Http/Controllers/Admin/GalleryPostController.php:72
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:71
  * @route '/admin/gallery-posts/{galleryPost}'
  */
 update.put = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -372,7 +372,7 @@ update.put = (args: { galleryPost: number | { id: number } } | [galleryPost: num
 
     /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::update
- * @see app/Http/Controllers/Admin/GalleryPostController.php:72
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:71
  * @route '/admin/gallery-posts/{galleryPost}'
  */
     const updateForm = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -387,7 +387,7 @@ update.put = (args: { galleryPost: number | { id: number } } | [galleryPost: num
 
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::update
- * @see app/Http/Controllers/Admin/GalleryPostController.php:72
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:71
  * @route '/admin/gallery-posts/{galleryPost}'
  */
         updateForm.put = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -403,7 +403,7 @@ update.put = (args: { galleryPost: number | { id: number } } | [galleryPost: num
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::destroy
- * @see app/Http/Controllers/Admin/GalleryPostController.php:103
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:98
  * @route '/admin/gallery-posts/{galleryPost}'
  */
 export const destroy = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -418,7 +418,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::destroy
- * @see app/Http/Controllers/Admin/GalleryPostController.php:103
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:98
  * @route '/admin/gallery-posts/{galleryPost}'
  */
 destroy.url = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -451,7 +451,7 @@ destroy.url = (args: { galleryPost: number | { id: number } } | [galleryPost: nu
 
 /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::destroy
- * @see app/Http/Controllers/Admin/GalleryPostController.php:103
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:98
  * @route '/admin/gallery-posts/{galleryPost}'
  */
 destroy.delete = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -461,7 +461,7 @@ destroy.delete = (args: { galleryPost: number | { id: number } } | [galleryPost:
 
     /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::destroy
- * @see app/Http/Controllers/Admin/GalleryPostController.php:103
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:98
  * @route '/admin/gallery-posts/{galleryPost}'
  */
     const destroyForm = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -476,7 +476,7 @@ destroy.delete = (args: { galleryPost: number | { id: number } } | [galleryPost:
 
             /**
 * @see \App\Http\Controllers\Admin\GalleryPostController::destroy
- * @see app/Http/Controllers/Admin/GalleryPostController.php:103
+ * @see app/Http/Controllers/Admin/GalleryPostController.php:98
  * @route '/admin/gallery-posts/{galleryPost}'
  */
         destroyForm.delete = (args: { galleryPost: number | { id: number } } | [galleryPost: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

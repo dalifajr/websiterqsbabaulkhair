@@ -21,7 +21,10 @@ type Props = {
 };
 
 export default function GalleryPostEdit({ post: galleryPost }: Props) {
-    const [preview, setPreview] = useState<string | null>(`/storage/${galleryPost.image_path}`);
+    const getImageUrl = (path: string) => {
+        return path.startsWith('data:') ? path : `/storage/${path}`;
+    };
+    const [preview, setPreview] = useState<string | null>(getImageUrl(galleryPost.image_path));
     const { data, setData, processing, errors, progress } = useForm({
         title: galleryPost.title,
         description: galleryPost.description || '',
